@@ -26,8 +26,8 @@ Feel free to explore the solutions and use them as a reference for your own lear
 
 If you'd like to discuss any specific problem, share your own solutions, or simply connect with me, you can reach out through the following channels:
 
-- **GitHub:** [Your GitHub Profile](https://github.com/Priyans1727C)
-- **LinkedIn:** [Your LinkedIn Profile](https://www.linkedin.com/in/Priyanshu)
+- **GitHub:** [MY GitHub Profile](https://github.com/Priyans1727C)
+- **LinkedIn:** [MY LinkedIn Profile](https://www.linkedin.com/in/Priyanshu)
 
 
 Happy coding and learning! 🚀
