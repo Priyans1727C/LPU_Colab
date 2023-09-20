@@ -1,0 +1,106 @@
+// You are using GCC
+#include <iostream>
+
+using namespace std;
+
+class Node {
+public:
+    int shift;
+    Node* next;
+
+    Node(int shift) {
+        this->shift = shift;
+        this->next = nullptr;
+    }
+};
+
+class ShiftSchedule {
+public:
+    Node* head;
+
+    ShiftSchedule() {
+        head = nullptr;
+    }
+
+    void insert(int shift) {
+        Node* newNode = new Node(shift);
+        if (!head) {
+            head = newNode;
+        } else {
+            Node* current = head;
+            while (current->next) {
+                current = current->next;
+            }
+            current->next = newNode;
+        }
+    }
+
+    void leftShift(int k) {
+        if (!head || k <= 0) {
+            return;  // Nothing to shift or invalid shift count
+        }
+
+        Node* current = head;
+        int length = 1;
+
+        // Find the length of the linked list
+        while (current->next) {
+            current = current->next;
+            length++;
+        }
+
+        k = k % length;  // Handle cases where k is greater than the length
+
+        if (k == 0) {
+            return;  // No need to shift
+        }
+
+        Node* newHead = head;
+        Node* prev = nullptr;
+
+        // Traverse to the new head after left-shifting by 'k' shifts
+        for (int i = 0; i < k; i++) {
+            prev = newHead;
+            newHead = newHead->next;
+        }
+
+        // Update pointers to perform the left-shift
+        prev->next = nullptr;
+        current->next = head;
+
+        head = newHead;
+    }
+
+    void display() {
+        Node* current = head;
+        while (current) {
+            cout << current->shift << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    int n, k;
+    cin >> n;
+    ShiftSchedule schedule;
+
+    for (int i = 0; i < n; ++i) {
+        int shift;
+        cin >> shift;
+        schedule.insert(shift);
+    }
+
+    cin >> k;
+
+    cout << "Original Linked List: ";
+    schedule.display();
+
+    schedule.leftShift(k);
+
+    cout << "Modified Linked List after left shift: ";
+    schedule.display();
+
+    return 0;
+}
