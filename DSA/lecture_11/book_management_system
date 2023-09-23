@@ -1,0 +1,88 @@
+#include <iostream>
+
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int value) {
+        data = value;
+        next = nullptr;
+    }
+};
+
+class LinkedList {
+private:
+    Node* head;
+
+public:
+    LinkedList() {
+        head = new Node(-1);
+    }
+
+    void append(int data) {
+        Node* newNode = new Node(data);
+        Node* current = head;
+
+        while (current->next != nullptr) {
+            current = current->next;
+        }
+
+        current->next = newNode;
+    }
+
+    void deleteElement(int position) {
+        if (position < 0) return;
+
+        Node* current = head;
+        int currentPosition = 0;
+
+        while (current != nullptr && currentPosition < position) {
+            current = current->next;
+            currentPosition++;
+        }
+
+        if (current == nullptr || current->next == nullptr) {
+            return;
+        }
+
+        Node* temp = current->next;
+        current->next = current->next->next;
+        delete temp;
+    }
+
+    void display() {
+        Node* current = head->next;
+        while (current != nullptr) {
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    int n, value, position;
+    cin >> n;
+
+    LinkedList linkedList;
+
+    for (int i = 0; i < n; i++) {
+        cin >> value;
+        linkedList.append(value);
+    }
+
+    cin >> position;
+
+    cout << "Linked List before deletion: ";
+    linkedList.display();
+
+    linkedList.deleteElement(position-1);
+
+    cout << "Linked List after deletion: ";
+    linkedList.display();
+
+    return 0;
+}
