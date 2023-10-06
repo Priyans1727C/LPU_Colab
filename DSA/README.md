@@ -29,5 +29,8 @@ If you'd like to discuss any specific problem, share your own solutions, or simp
 - **GitHub:** [MY GitHub Profile](https://github.com/Priyans1727C)
 - **LinkedIn:** [MY LinkedIn Profile](https://www.linkedin.com/in/Priyanshu)
 
+## Code for download this Repo
+```git clone https://github.com/Priyans1727C/LPU_Colab.git```
+
 
 Happy coding and learning! 🚀
