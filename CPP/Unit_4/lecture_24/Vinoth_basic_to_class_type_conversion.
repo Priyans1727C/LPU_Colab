@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cmath>
+
+class Population {
+public:
+    Population(int initialPopulation) : currentPopulation(initialPopulation) {}
+
+    void calculatePopulationAfterYears(double years) {
+        double growthRate = 0.02;  // 2% growth rate per year
+        double populationAfterYears = currentPopulation * pow(1 + growthRate, years);
+        int roundedPopulation = static_cast<int>(populationAfterYears + 0.5);
+
+        std::cout << "Population after " << years << " years: " << roundedPopulation << std::endl;
+    }
+
+private:
+    int currentPopulation;
+};
+
+int main() {
+    int initialPopulation;
+    double years;
+
+    std::cin >> initialPopulation >> years;
+
+    Population population(initialPopulation);
+    population.calculatePopulationAfterYears(years);
+
+    return 0;
+}
