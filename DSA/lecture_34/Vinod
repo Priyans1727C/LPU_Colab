@@ -1,0 +1,75 @@
+
+#include <iostream>
+
+struct TreeNode {
+    int value;
+    TreeNode* left;
+    TreeNode* right;
+};
+
+TreeNode* createNode(int value) {
+    TreeNode* newNode = new TreeNode();
+    newNode->value = value;
+    newNode->left = nullptr;
+    newNode->right = nullptr;
+    return newNode;
+}
+
+void inOrderTraversal(TreeNode* root, int k, int& count, int& result) {
+    if (root == nullptr || count >= k) {
+        return;
+    }
+
+    inOrderTraversal(root->left, k, count, result);
+
+    count++;
+    if (count == k) {
+        result = root->value;
+        return;
+    }
+
+    inOrderTraversal(root->right, k, count, result);
+}
+
+int findKthSmallest(TreeNode* root, int k) {
+    int count = 0;
+    int result = -1;
+    inOrderTraversal(root, k, count, result);
+    return result;
+}
+
+int main() {
+    int n, k;
+    std::cin >> n;
+    int val;
+    TreeNode* root = nullptr;
+    for (int i = 0; i < n; i++) {
+        std::cin >> val;
+        if (root == nullptr) {
+            root = createNode(val);
+        } else {
+            TreeNode* current = root;
+            while (true) {
+                if (val < current->value) {
+                    if (current->left == nullptr) {
+                        current->left = createNode(val);
+                        break;
+                    } else {
+                        current = current->left;
+                    }
+                } else {
+                    if (current->right == nullptr) {
+                        current->right = createNode(val);
+                        break;
+                    } else {
+                        current = current->right;
+                    }
+                }
+            }
+        }
+    }
+    std::cin >> k;
+    int kthSmallest = findKthSmallest(root, k);
+    std::cout << kthSmallest << std::endl;
+    return 0;
+}
