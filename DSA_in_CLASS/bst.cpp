@@ -49,6 +49,8 @@ bool searchKey(Node* root,int key)
     }
     return false;
 }
+
+//main function
 int main()
 {
     Node*root =NULL;
