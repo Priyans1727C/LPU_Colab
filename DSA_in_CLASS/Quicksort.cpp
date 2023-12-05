@@ -1,41 +1,53 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int pratition(int arr[],int l,int h)
-{
-    int pivot=arr[l];
-    int i=l;
-    int j=h;
+int partition(int arr[], int low, int high) {
+    int pivot = arr[low];
+    int i = low + 1;
+    int j = high;
 
-    while(i<j)
-    {
-        while(pivot>=arr[i])i++;
-        while(pivot<arr[j])j--;
-        if(i<j)
-        {
-            swap(arr[i],arr[j]);
+    while (true) {
+        while (i <= j && arr[i] <= pivot) {
+            i++;
+        }
+        while (j >= i && arr[j] > pivot) {
+            j--;
+        }
+        if (i <= j) {
+            swap(arr[i], arr[j]);
+        } else {
+            break;
         }
     }
-    swap(arr[l],arr[j]);
+
+    swap(arr[low], arr[j]);
 
     return j;
-
 }
 
-void quickshort(int arr[],int l,int h)
-{
-    int pivot = pratition(arr,l,h);
-    pratition(arr,l,pivot);
-    pratition(arr,pivot+1,h);
-
+void quicksort(int arr[], int low, int high) {
+    if (low < high) {
+        int pivot = partition(arr, low, high);
+        quicksort(arr, low, pivot - 1);
+        quicksort(arr, pivot + 1, high);
+    }
 }
 
+int main() {
+    int arr[] = {4, 7, 3, 8, 2, 1, 9};
+    int n = sizeof(arr) / sizeof(arr[0]);
 
+    cout << "Original array:";
+    for (int i = 0; i < n; i++) {
+        cout << " " << arr[i];
+    }
 
-int main()
-{
-    int arr[]={4,7,3,8,2,1,9};
-    quickshort(arr,0,7);
-    for(int i:arr)
-    cout<<" "<<i;
+    quicksort(arr, 0, n - 1);
+
+    cout << "\nSorted array:";
+    for (int i = 0; i < n; i++) {
+        cout << " " << arr[i];
+    }
+
+    return 0;
 }
